@@ -135,8 +135,8 @@ module Gibberish
     end
 
     def encrypt(plaintext, adata='')
-      salt = SecureRandom.random_bytes(8)
-      iv = SecureRandom.random_bytes(12)
+      salt = @opts[:salt] || SecureRandom.random_bytes(8)
+      iv = 'lalalalalala'
       key = OpenSSL::PKCS5.pbkdf2_hmac(@password, salt, @opts[:iter], @opts[:ks]/8, 'SHA256')
       cipherMode = "#{@opts[:cipher]}-#{@opts[:ks]}-#{@opts[:mode]}"
       c = OpenSSL::Cipher.new(cipherMode)
